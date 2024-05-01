@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Pokepedia</h1>
+    </header>
+    <main>
+        <section id="search">
+            <input type="text" id="search-input" placeholder="Enter Pokemon ID or name...">
+            <select id="searchBy">
+                <option value="name">Name</option>
+                <option value="type">Type</option>
+                <option value="ability">Ability</option>
+            </select>
+            <button id="search-button" onclick="searchPokemon()">Search</button>
+        </section>
+        <section id="favorites">
+            <h2>Favorites</h2>
+            <ul id="favorites-list"></ul>
+        </section>
+        <section id="pokemon-display">
+            <h2 id="pokemon-name"></h2>
+            <img id="pokemon-img" src="" alt="Pokemon image">
+            <div id="pokemon-details">
+                <p id="pokemon-type"></p>
+                <p id="pokemon-abilities"></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Created by Kanisha Pradhan</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

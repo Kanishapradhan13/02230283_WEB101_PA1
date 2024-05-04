@@ -1,98 +1,135 @@
-body,
-html {
+/* Ensure the HTML and body occupy the full height of the viewport */
+html,
+body {
   margin: 0;
   padding: 0;
+  background: url("bg_image.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+.center_body {
+  /* height: 100%; */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
   font-family: "Arial", sans-serif;
-  background-image: url("bg_image.jpg"); /* Set the background image */
-  background-size: cover; /* Cover the entire page */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Do not repeat the background */
 }
 
+/* Styling for the header and footer for consistency */
 header,
 footer {
-  background-color: rgb(0, 0, 0); /* Set the background color to black */
-  color: rgb(162, 17, 17); /* Set the text color to red */
+  background-color: rgb(0, 0, 0); /* Dark background for contrast */
+  color: rgb(162, 17, 17); /* Red text color for visibility and design */
   text-align: center;
-  padding: 10px 20px;
+  padding: 10px 20px; /* Padding for spacing */
 }
 
+/* Main content styling to align everything centrally */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 80vh;
 }
 
+/* Styling for the search section for functionality and aesthetics */
 #search {
-  margin: 20px;
+  margin: 20px; /* Space around search to separate from other content */
 }
 
 #search-input {
   padding: 10px;
   margin-right: 5px;
-  width: 300px;
+  width: 300px; /* Width to fit longer names or IDs */
 }
 
 #search-button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
+  background-color: #007bff; /* Blue background for visual appeal */
+  color: white; /* White text for contrast */
+  border: none; /* No border for a cleaner look */
+  cursor: pointer; /* Cursor indicates clickable */
 }
 
 #search-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover for interactive feedback */
 }
 
-#pokemon-display {
-  text-align: center;
-}
-
-#pokemon-img {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-}
-
-footer {
-  margin-top: 20px;
-}
-
-#favorites h2 {
-  color: #000000;
-  font-size: 25px; /* Set the font size larger than the default */
-  margin: 0;
-  /* background-color: #f5f5f5; */
-  padding-left: 45rem;
-}
-
-/* Style for the Pokemon display area */
+/* Styling for the Pokémon display section */
 #pokemon-display {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allows multiple items to wrap in rows */
   gap: 20px; /* Space between cards */
-  padding: 20px; /* Padding around the grid container */
-  justify-content: center; /* Center cards horizontally */
+  padding: 20px; /* Padding around the entire grid */
+  justify-content: center; /* Center the cards horizontally */
 }
 
-/* Style for individual Pokemon cards */
+/* Individual Pokémon card styling */
 .pokemon-card {
-  flex: 0 1 150px; /* Do not grow, can shrink, base width of 150px */
+  flex: 0 1 150px; /* Flex basis of 150px, but can shrink and doesn't grow */
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #99ddff;
-  border: 2px solid #000000;
+  background-color: #b30000; /* Light background for each card */
+  border: 1px solid #ddd; /* Subtle border for definition */
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
 }
 
 .pokemon-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px); /* Move card up slightly on hover */
 }
 
-#pokemon-name h2{
-  color: #f5f5f5;
+/* Add styles for the pokemon-info for better visual */
+#pokemon-info {
+  padding: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Light background to enhance readability */
+  border-radius: 10px; /* Rounded corners for aesthetics */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Style adjustments for text and images within pokemon-info */
+#pokemon-info h1,
+#pokemon-info p {
+  margin: 10px 0;
+}
+
+#pokemon-info img {
+  max-width: 100%; /* Ensure images are responsive */
+  height: auto;
+}
+
+h1 {
+  text-align: center; /* Center the text horizontally */
+  margin: 20px 0; /* Add some space around the heading */
+  color: rgb(162, 17, 17);
+}
+
+#favorites-list {
+  width: 80%; /* Limit the width to enhance readability */
+  max-width: 600px; /* Maximum width */
+  padding: 20px; /* Padding inside the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+  border-radius: 10px; /* Rounded corners */
+  text-align: center; /* Ensure all text within is centered */
+}
+
+.fav_body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Full height to ensure we can use flexbox to center */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  font-family: "Arial", sans-serif; /* Standard font for clean text */
+  background: url("bg_image.jpg") no-repeat center center fixed; /* Optional background */
+  background-size: cover; /* Cover the full area of the page */
 }

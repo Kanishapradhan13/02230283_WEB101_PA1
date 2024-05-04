@@ -1,13 +1,21 @@
 var favoritesCount = {}; // Object to keep track of the counts
 
+function displayPokemon(pokemonList) {
+  const display = document.getElementById("pokemon-display");
+  pokemonList.forEach((pokemon) => {
+    addPokemonToDisplay(pokemon);
+  });
+}
+
 function addToFavorites(pokemonName) {
-  if (favoritesCount[pokemonName]) {
-    favoritesCount[pokemonName]++; // Increase count if already added
+  let favorites = JSON.parse(localStorage.getItem("favorites") || "{}");
+  if (favorites[pokemonName]) {
+    favorites[pokemonName]++;
   } else {
-    favoritesCount[pokemonName] = 1; // Initialize count if not already added
+    favorites[pokemonName] = 1;
   }
 
-  updateFavoritesDisplay(); // Update the display with the new counts
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
 function updateFavoritesDisplay() {
@@ -29,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchInitialPokemon() {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
     .then((response) => response.json())
     .then((data) => {
       displayInitialPokemon(data.results);
@@ -61,10 +69,12 @@ function addPokemonToDisplay(pokemon) {
   const pokemonElement = document.createElement("div");
   pokemonElement.classList.add("pokemon-card");
   pokemonElement.innerHTML = `
-        <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" style="width:100px;height:100px;">
-        <p>${pokemon.name}</p>
-        <button onclick="addToFavorites('${pokemon.name}')">Add to Favorites</button>
-    `;
+      <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" style="width:100px;height:100px;">
+      <p>${pokemon.name}</p>
+      <button onclick="addToFavorites('${pokemon.name}')">Add to Favorites</button>
+      <br> 
+      <a href="pokemonDetails.html?pokemon=${pokemon.name}" target="_blank"><button>Know More</button></a>
+  `;
   display.appendChild(pokemonElement);
 }
 
@@ -84,44 +94,3 @@ function displayPokemonData(pokemon) {
   display.innerHTML = ""; // Clear the display area
   addPokemonToDisplay(pokemon);
 }
-
-
-function searchPokemon() {
-  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-  const searchBy = document.getElementById('searchBy').value;
-
-  let filteredPokemon;
-  if (searchBy === 'name') {
-      filteredPokemon = allPokemon.filter(pokemon => pokemon.name.includes(searchTerm));
-  } else if (searchBy === 'type') {
-      filteredPokemon = allPokemon.filter(pokemon => pokemon.types.some(type => type.type.name.includes(searchTerm)));
-  } else if (searchBy === 'ability') {
-      filteredPokemon = allPokemon.filter(pokemon => pokemon.abilities.some(ability => ability.ability.name.includes(searchTerm)));
-  }
-
-displayPokemonList(filteredPokemon);
-}
-
-async function openPokemonDetails(pokemonData) {
-  const description = await getDescription(pokemonData.species.url);
-  const detailsUrl = `details.html?name=${pokemonData.name}&image=${pokemonData.sprites.front_default}&weight=${pokemonData.weight}&height=${pokemonData.height}&types=${pokemonData.types.map(type => type.type.name).join(', ')}&description=${encodeURIComponent(description)}`;
-  window.open(detailsUrl, '_blank');
-}
-
-async function getDescription(speciesUrl) {
-  const response = await fetch(speciesUrl);
-  const data = await response.json();
-  const flavorText = data.flavor_text_entries.find(entry => entry.language.name === 'en');
-  return flavorText ? flavorText.flavor_text : 'No description available.';
-}
-
-function createPokemonCard(pokemonData) {
-  const card = document.createElement('div');
-  card.classList.add('pokemonCard');
-  card.addEventListener('click', () => openPokemonDetails(pokemonData));
-
-  // ... (rest of the card creation code)
-}
-
-
-// fetchAllPokemon();
